@@ -1,1 +1,1 @@
-![图片]('https://github.com/Vincentwild123/Notes/blob/master/1.png')
+![图片]('https://raw.githubusercontent.com/Vincentwild123/Notes/master/1.png')
