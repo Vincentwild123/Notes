@@ -1,0 +1,12 @@
+1.渲染引擎：Tridend三叉戟，Gecko 壁虎，webkit
+2.webKit大致结构
+1.webCore 核心包含：CSS，SVG，布局，渲染树，HTML，DOM，Inspector
+2.JSCore
+3.webKit Ports
+
+3.渲染流程：网页内容html文件——html解释器——CSS，js解析——渲染树——布局模型计算所得——绘图模块绘图
+4.JIT just in time
+
+5.V8
+1.源代码——AST——JIT——本地代码
+2.

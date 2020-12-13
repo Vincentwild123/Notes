@@ -1,0 +1,27 @@
+1.nodeJS会把耗时的操作尽可能的转移到系统内核去执行，完成后，内核再通知node执行回调函数并携带数据
+2.事件循环阶段，每个阶段都有一个队列，运行到该阶段时，只有搞定这个阶段的任务队列才会进行下一个阶段
+1.timers 定时器，执行settimeout和setinterval安排的回调
+特点：
+执行时间不确定
+可能被轮询阶段影响
+2.pending,callbacks,延迟的I/O回调
+系统底层操作的回调，如TCP错误
+3.idle，prepare：闲置预备阶段，仅供内部使用
+4.poll：轮询，处理I/O事件的回调，适当时候，Node将在这里堵塞
+计算定时器应该阻塞的时间
+执行该阶段队列的所有回调函数
+如果队列为空，也就是没有工作可做，这是如果有setImmediate设置的回调存在，就会直接结束该阶段，不会等待响应的I/O回调，如果没有setImmediate设置的回调队列，就会等待I/O操作
+5.cheak：setImmediate的回调在此执行
+
+6.close callback：关闭的回调
+close事件的监听回调
+
+其他：
+1.setInterval实际上是setTimeout的嵌套调用语法，在每次事件循环都会把回调添加到timers队列
+2.process.nextTick无论事件循环进行到哪个阶段，完成后都将清空process.nextTick队列
+为什么要用process.nextTick,在事件循环下一个阶段进行之前，清理不必要的资源
+3.宏任务和微任务
+微任务会在主线之后和事件循环的每个阶段之后立即执行。
+事件循环中timers，process.nextTick,I/O都是宏任务
+process.nextTick > promise.then = queueMicrotask
+4.event的回调是同步
